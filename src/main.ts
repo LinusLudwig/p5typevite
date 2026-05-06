@@ -2,6 +2,7 @@ import P5 from "p5";
 
 const sketch = (p: P5) => {
   var gnomeImage: P5.Image | undefined = undefined;
+  var isDrawing: boolean = false;
 
   p.preload = () => {
     // preload the gnome image and store it in a variable
@@ -66,10 +67,19 @@ const sketch = (p: P5) => {
   };
 
   p.draw = () => {
-    p.fill(255, 0, 0); // red
-    p.noStroke();
-    p.rectMode(p.CENTER);
-    p.rect(p.mouseX, p.mouseY, 50, 50);
+    if (isDrawing) {
+      p.fill(255, 0, 0); // red
+      p.noStroke();
+      p.rectMode(p.CENTER);
+      p.rect(p.mouseX, p.mouseY, 50, 50);
+    }
+  };
+
+  p.mousePressed = () => {
+    isDrawing = true;
+  };
+  p.mouseReleased = () => {
+    isDrawing = false;
   };
 };
 
